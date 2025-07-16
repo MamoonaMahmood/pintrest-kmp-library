@@ -102,7 +102,7 @@ mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
     signAllPublications()
-    coordinates(groupId = "io.github.mamoonamahmood", artifactId = "pintrest-kmp" , version = "1.0.1" )
+    coordinates(groupId = "io.github.mamoonamahmood", artifactId = "pintrest-kmp" , version = "1.0.2" )
 
     pom {
         name = "pintrest-kmp"
