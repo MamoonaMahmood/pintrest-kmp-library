@@ -1,11 +1,13 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
+import kotlin.collections.set
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    //alias(libs.plugins.kotlinCocoapods)
+    alias(libs.plugins.kotlinCocoapods)
     kotlin("plugin.serialization") version "2.1.21"
     //id("maven-publish")
     id("com.vanniktech.maven.publish") version "0.28.0"
@@ -83,6 +85,21 @@ kotlin {
             //cryptography
             implementation("dev.whyoleg.cryptography:cryptography-provider-jdk:0.4.0")
         }
+    }
+
+    cocoapods {
+        version = "1.16.2"
+        summary = "Some description for a Kotlin/Native module"
+        homepage = "Link to a Kotlin/Native module homepage"
+        name = "iosTestPods"
+
+        framework {
+            baseName = "iosTestPods"
+            isStatic =  true
+            transitiveExport = false
+        }
+        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
     }
 }
 
