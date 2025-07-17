@@ -89,15 +89,18 @@ kotlin {
 
     cocoapods {
         version = "1.16.2"
-        summary = "Some description for a Kotlin/Native module"
-        homepage = "Link to a Kotlin/Native module homepage"
+        summary = "shared library for pintrest tracking"
+        homepage = "https://github.com/MamoonaMahmood/pintrest-kmp-library.git"
         source = "{ :git => 'git@github.com:MamoonaMahmood/pintrest-kmp-library.git', :tag => '1.0.2' }"
         name = "iosTestPods"
+        specRepos {
+            url("https://github.com/MamoonaMahmood/pintrest-kmp-library.git")
+        }
 
         framework {
             baseName = "iosTestPods"
-            isStatic =  false
-            transitiveExport = false
+            isStatic =  true
+//            transitiveExport = false
         }
         xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
         xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
