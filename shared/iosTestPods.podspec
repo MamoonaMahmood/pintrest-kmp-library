@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
     spec.name                     = 'iosTestPods'
     spec.version                  = '1.16.2'
     spec.homepage                 = 'Link to a Kotlin/Native module homepage'
-    spec.source                   = { :git => 'https://github.com/MamoonaMahmood/pintrest-kmp-library.git', :tag => 'v1.16.2' }
+    spec.source                   = { :git => 'https://github.com/MamoonaMahmood/pintrest-kmp-library.git', :tag => 'v1.0.2' }
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Some description for a Kotlin/Native module'
