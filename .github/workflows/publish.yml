@@ -25,17 +25,17 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY_CONTENTS }}
 
-      - name: Push release to iOS Cocoapods Repo
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      # - name: Push release to iOS Cocoapods Repo
+      #   run: |
+      #     git config --global user.name 'github-actions[bot]'
+      #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          git clone --depth=1 --branch=main https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@github.com:MamoonaMahmood/ios-cocoapods-host.git temp-repo
+      #     git clone --depth=1 --branch=main https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@github.com:MamoonaMahmood/ios-cocoapods-host.git temp-repo
 
-          rm -rf temp-repo/*
-          cp -R shared/cocoapods/publish/release/* temp-repo/
+      #     rm -rf temp-repo/*
+      #     cp -R shared/cocoapods/publish/release/* temp-repo/
 
-          cd temp-repo
-          git add .
-          git commit -m "Update Cocoapods release from $GITHUB_REPOSITORY $GITHUB_REF"
-          git push origin main
+      #     cd temp-repo
+      #     git add .
+      #     git commit -m "Update Cocoapods release from $GITHUB_REPOSITORY $GITHUB_REF"
+      #     git push origin main
