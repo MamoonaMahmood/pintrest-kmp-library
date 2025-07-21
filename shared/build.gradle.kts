@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.gradle.kotlin.dsl.cocoapods
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
@@ -11,6 +12,10 @@ plugins {
     kotlin("plugin.serialization") version "2.1.21"
     //id("maven-publish")
     id("com.vanniktech.maven.publish") version "0.28.0"
+
+    id("co.touchlab.faktory.kmmbridge") version "0.3.5"
+
+
 }
 
 //for MavenLocal set up
@@ -35,16 +40,20 @@ kotlin {
         publishLibraryVariants("release", "debug")
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "Shared"
-            isStatic = true
-        }
-    }
+//    listOf(
+//        iosX64(),
+//        iosArm64(),
+////        iosSimulatorArm64()
+//    ).forEach { iosTarget ->
+//        iosTarget.binaries.framework {
+//            baseName = "iosTestPods"
+//            isStatic = true
+//        }
+//    }
+
+    iosArm64()
+    iosX64()
+    iosSimulatorArm64()
 
     jvm()
 
@@ -86,6 +95,15 @@ kotlin {
             implementation("dev.whyoleg.cryptography:cryptography-provider-jdk:0.4.0")
         }
     }
+
+    kmmbridge {
+
+        cocoapods(
+            specRepoUrl = "git@github.com:MamoonaMahmood/ios-cocoapods-host.git",
+            verboseErrors = true
+        )
+    }
+
 
     cocoapods {
         version = "1.16.2"
