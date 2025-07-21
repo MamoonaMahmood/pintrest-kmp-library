@@ -4,6 +4,11 @@ name: Publish
 on:
   release:
     types: [released, prereleased]
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*' # or '1.*' depending on versioning
+      
 jobs:
   publish:
     name: Release build and publish
@@ -39,3 +44,13 @@ jobs:
       #     git add .
       #     git commit -m "Update Cocoapods release from $GITHUB_REPOSITORY $GITHUB_REF"
       #     git push origin main
+
+      - name: Set up SSH for Cocoapods Repo Push
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KMMBRIDGE_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Publish KMMBridge
+        run: ./gradlew publishKmmBridge
